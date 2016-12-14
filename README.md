@@ -25,14 +25,31 @@ pip install markdown
 cd bank_demo  
 source bin/activate  
 
-cd poc_bank  
+cd poc_bank
+python manage.py makemigrations fund_transfer  
 python manage.py migrate  
-python manage.py runserver  
+(python manage.py runserver)
+path/to/nginx-1.10.2/sbin/nginx
+gunicorn -b 127.0.0.1:8000 poc_bank.wsgi:application
 
-http://127.0.0.1:8000  
-http://127.0.0.1:8000/api/payee/  
-http://127.0.0.1:8000/api/customer/  
-http://127.0.0.1:8000/api/customer_account/  
-http://127.0.0.1:8000/api/fund_transfer/  
+## To stop
+Ctrl+C
+nginx -s stop
+deactivate
 
-gunicorn -b 127.0.0.1:8000 poc_bank.wsgi:application  
+# Application Login, Admin and REST URLS
+
+## Application Login URL
+http://localhost:8080
+
+## Admin URL
+http://localhost:8080/admin
+
+## REST URL
+http://localhost:8080/api/same_payee/
+http://localhost:8080/api/other_payee/  
+http://localhost:8080/api/customer/  
+http://localhost:8080/api/customer_account/  
+http://localhost:8080/api/fund_transfer/  
+
+-- tested on my MBP --

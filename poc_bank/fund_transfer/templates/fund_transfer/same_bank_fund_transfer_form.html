@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}Book Transfer{% endblock title %}
+{% block transfer_type %}Transfer within bank{% endblock transfer_type %}
+{% block within_bank_tab %}class="active"{% endblock within_bank_tab %}
+
 {% block content %}
 <form action="{% url 'same_bank_fund_transfer_list' %}" method="post">
     {% csrf_token %} {{ form }}

@@ -47,6 +47,7 @@
     </div>
 </div>
 
+{% if user.is_authenticated %}
 <div>
     <ul class="nav nav-pills">
         <li class="active"><a href="#">Transfer</a></li>
@@ -64,6 +65,11 @@
     {% block content %}
     {% endblock content %}
 </div>
-
+{% else %}
+<div class="container" style="width: 50%">
+{% block login %}
+{% endblock login %}
+{% endif %}
+</div>
 </body>
 </html>

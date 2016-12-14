@@ -1,13 +1,15 @@
 from django.conf.urls import url
 from rest_framework import routers
 from . import views
+from . import viewsets
 
 
 router = routers.DefaultRouter()
-router.register(r'payee', views.PayeeViewSet)
-router.register(r'customer', views.CustomerViewSet)
-router.register(r'customer_account', views.CustomerAccountViewSet)
-router.register(r'fund_transfer', views.FundTransferViewSet)
+router.register(r'same_payee', viewsets.SamePayeeViewSet)
+router.register(r'other_payee', viewsets.OtherPayeeViewSet)
+router.register(r'customer', viewsets.CustomerViewSet)
+router.register(r'customer_account', viewsets.CustomerAccountViewSet)
+router.register(r'fund_transfer', viewsets.FundTransferViewSet)
 
 
 urlpatterns = router.urls

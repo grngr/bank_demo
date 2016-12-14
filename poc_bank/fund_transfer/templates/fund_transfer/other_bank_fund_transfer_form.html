@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}Electronic Fund Transfer{% endblock title %}
+{% block transfer_type %}Transfer to another bank{% endblock transfer_type %}
+{% block other_bank_tab %}class="active"{% endblock other_bank_tab %}
+
 {% block content %}
 <form action="{% url 'other_bank_fund_transfer_list' %}" method="post">
     {% csrf_token %} {{ form }}
