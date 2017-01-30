@@ -25,12 +25,12 @@ pip install markdown
 cd bank_demo  
 source bin/activate  
 
-cd poc_bank
+cd poc_bank  
 python manage.py makemigrations fund_transfer  
 python manage.py migrate  
 (python manage.py runserver)  
 path/to/nginx-1.10.2/sbin/nginx  
-gunicorn -b 127.0.0.1:8000 poc_bank.wsgi:application
+gunicorn -b 127.0.0.1:8000 poc_bank.wsgi:application  
 
 ## To stop
 Ctrl+C  
