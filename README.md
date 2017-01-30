@@ -28,25 +28,25 @@ source bin/activate
 cd poc_bank
 python manage.py makemigrations fund_transfer  
 python manage.py migrate  
-(python manage.py runserver)
-path/to/nginx-1.10.2/sbin/nginx
+(python manage.py runserver)  
+path/to/nginx-1.10.2/sbin/nginx  
 gunicorn -b 127.0.0.1:8000 poc_bank.wsgi:application
 
 ## To stop
-Ctrl+C
-nginx -s stop
-deactivate
+Ctrl+C  
+nginx -s stop  
+deactivate  
 
 # Application Login, Admin and REST URLS
 
 ## Application Login URL
-http://localhost:8080
+http://localhost:8080  
 
 ## Admin URL
-http://localhost:8080/admin
+http://localhost:8080/admin  
 
 ## REST URL
-http://localhost:8080/api/same_payee/
+http://localhost:8080/api/same_payee/  
 http://localhost:8080/api/other_payee/  
 http://localhost:8080/api/customer/  
 http://localhost:8080/api/customer_account/  
