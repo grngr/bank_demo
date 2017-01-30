@@ -29,8 +29,8 @@ cd poc_bank
 python manage.py makemigrations fund_transfer  
 python manage.py migrate  
 
-python manage.py createsuperuser
-# admin / blank email / wordpass / wordpass
+python manage.py createsuperuser  
+admin / blank email / wordpass / wordpass  
 
 (For test purpose only: python manage.py runserver)  
 path/to/nginx-1.10.2/sbin/nginx  
