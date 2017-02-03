@@ -22,8 +22,8 @@ pip install djangorestframework
 pip install markdown  
 
 ## Create and activate virtual environment. Initiate the server
-cd /path/to/project/directory
-virtualenv -p `which python3` bank_demo
+cd /path/to/project/directory  
+virtualenv -p \`which python3\` bank_demo  
 
 cd bank_demo  
 source bin/activate  
