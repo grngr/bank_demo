@@ -16,10 +16,10 @@ cd /path/to/downloaded/source/nginx-1.10.2
 
 ## Install through pip
 pip install django  
+pip install django-crispy-forms  
 pip install psycopg2  
 pip install gunicorn  
 pip install djangorestframework  
-pip install django-crispy-forms  
 
 ## Create and activate virtual environment. Initiate the server
 cd /path/to/project/directory  
