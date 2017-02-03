@@ -28,6 +28,8 @@ virtualenv -p \`which python3\` bank_demo
 cd bank_demo  
 source bin/activate  
 
+django-admin.py startproject poc_bank  
+
 cd poc_bank  
 python manage.py makemigrations fund_transfer  
 python manage.py migrate  
