@@ -1,5 +1,5 @@
 # Prerequisites
-## install postgres
+## Install postgres
 CREATE DATABASE poc_bank  
     WITH  
     OWNER = postgres  
@@ -9,19 +9,22 @@ CREATE DATABASE poc_bank
 COMMENT ON DATABASE poc_bank  
     IS 'sample db for proof of concept bank';  
 
-## install nginx
+## Install nginx
 download pcre 1, openssl and nginx sources  
 cd /path/to/downloaded/source/nginx-1.10.2  
 ./configure --prefix=/installation/location/nginx-1.10.2 --with-pcre=/path/to/downloaded/source/pcre-8.38 --with-http_ssl_module --with-openssl=/path/to/downloaded/source/openssl-1.1.0c  
 
-## install through pip
+## Install through pip
 pip install django  
 pip install psycopg2  
 pip install gunicorn  
 pip install djangorestframework  
 pip install markdown  
 
-## activate virtual environment and initiate the server
+## Create and activate virtual environment. Initiate the server
+cd /path/to/project/directory
+virtualenv -p `which python3` bank_demo
+
 cd bank_demo  
 source bin/activate  
 
