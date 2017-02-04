@@ -37,7 +37,9 @@ python manage.py migrate
 python manage.py createsuperuser  
 admin / blank email / wordpass / wordpass  
 
-(For test purpose only: python manage.py runserver)  
+(For test purpose only: python manage.py runserver  
+http://localhost:8000)  
+
 path/to/nginx-1.10.2/sbin/nginx  
 gunicorn -b 127.0.0.1:8000 poc_bank.wsgi:application  
 
