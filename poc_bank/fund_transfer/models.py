@@ -6,8 +6,9 @@ from django.db.models import Q
 
 
 ACCOUNT_TYPE_CHOICES = (
-    ('s', 'Savings'),
-    ('c', 'Current')
+    ('sa', 'Savings'),
+    ('ca', 'Current'),
+    ('cc', 'Credit Card')
 )
 
 
@@ -32,7 +33,7 @@ class Payee(models.Model):
     name = models.CharField(max_length=50)
     nickname = models.CharField(max_length=30)
     account_number = models.CharField(max_length=35)
-    account_type = models.CharField(max_length=1, default='s', choices=ACCOUNT_TYPE_CHOICES,
+    account_type = models.CharField(max_length=2, default='sa', choices=ACCOUNT_TYPE_CHOICES,
                                     verbose_name='Account / Card type',
                                     help_text='Please choose the account / card type')
     bank_code = models.CharField(max_length=50)
@@ -61,7 +62,7 @@ class CustomerAccountManager(models.Manager):
 class CustomerAccount(models.Model):
     customer = models.ForeignKey(Customer)
     account_number = models.CharField(max_length=35)
-    account_type = models.CharField(max_length=1, default='s', choices=ACCOUNT_TYPE_CHOICES)
+    account_type = models.CharField(max_length=2, default='sa', choices=ACCOUNT_TYPE_CHOICES)
     balance = models.DecimalField(max_digits=14, decimal_places=2)  # 999,999,999,999.99
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)

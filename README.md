@@ -23,17 +23,25 @@ pip install djangorestframework
 
 ## Create and activate virtual environment. Initiate the server
 cd /path/to/project/directory  
-virtualenv -p \`which python3\` bank_demo  
+[//]virtualenv -p \`which python3\` bank_demo  
+python3 -m venv bank_demo  
 
 cd bank_demo  
 source bin/activate  
 
+## Install dependencies and start project
+mkdir config
+vim config/requirements.txt
+pip install -r config/requirements.txt
+
 django-admin.py startproject poc_bank  
 
+## Model changes to be applied
 cd poc_bank  
 python manage.py makemigrations fund_transfer  
 python manage.py migrate  
 
+## Create supersuer
 python manage.py createsuperuser  
 admin / blank email / wordpass / wordpass  
 

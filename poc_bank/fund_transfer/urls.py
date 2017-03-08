@@ -5,8 +5,8 @@ from . import viewsets
 
 
 router = routers.DefaultRouter()
-router.register(r'same_payee', viewsets.SamePayeeViewSet)
-router.register(r'other_payee', viewsets.OtherPayeeViewSet)
+router.register(r'same_payee', viewsets.SamePayeeViewSet, 'same_payee')
+router.register(r'other_payee', viewsets.OtherPayeeViewSet, 'other_payee')
 router.register(r'customer', viewsets.CustomerViewSet)
 router.register(r'customer_account', viewsets.CustomerAccountViewSet)
 router.register(r'fund_transfer', viewsets.FundTransferViewSet)
