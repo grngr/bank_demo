@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Q
 
 # Create your models here.
 
@@ -24,8 +23,13 @@ class Customer(models.Model):
 
 
 class PayeeManager(models.Manager):
-    def payee_for_customer(self, user):
-        return super(PayeeManager, self).get_queryset().filter(customer__user=user)
+    def payees_for_customer(self, user, bank_code, is_same_bank):
+        if is_same_bank:
+            return super(PayeeManager, self).get_queryset().filter(
+                customer__user=user).filter(bank_code=bank_code).order_by('nickname')
+        else:
+            return super(PayeeManager, self).get_queryset().filter(
+                customer__user=user).exclude(bank_code=bank_code).order_by('nickname')
 
 
 class Payee(models.Model):
