@@ -23,13 +23,11 @@ class Customer(models.Model):
 
 
 class PayeeManager(models.Manager):
-    def payees_for_customer(self, user, bank_code, is_same_bank):
-        if is_same_bank:
-            return super(PayeeManager, self).get_queryset().filter(
-                customer__user=user).filter(bank_code=bank_code).order_by('nickname')
-        else:
-            return super(PayeeManager, self).get_queryset().filter(
-                customer__user=user).exclude(bank_code=bank_code).order_by('nickname')
+    def fetch_payees_for_customer(self, user, bank_code, is_same_bank):
+        qs = super(PayeeManager, self).get_queryset().filter(customer__user=user)
+        differentiate_by = qs.filter if is_same_bank else qs.exclude
+        qs = differentiate_by(bank_code=bank_code)
+        return qs.order_by('nickname')
 
 
 class Payee(models.Model):
@@ -48,14 +46,20 @@ class Payee(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     objects = PayeeManager()
 
+    def set_customer(self, user):
+        self.customer = Customer.objects.filter(user=user)[0]
+
+    def set_customer_and_bank(self, user, bank_code, bank_name, bank_city, bank_branch):
+        self.set_customer(user)
+        self.bank_code = bank_code
+        self.bank_name = bank_name
+        self.bank_city = bank_city
+        self.bank_branch = bank_branch
+
     def __str__(self):
-        return '{} | {} | {} | {} | {} | {} | {} | {} | {} | {} | {} | {}'.format(self.customer.user.username, self.id,
-                                                                                  self.name,
-                                                                                  self.nickname, self.account_number,
-                                                                                  self.account_type, self.bank_code,
-                                                                                  self.bank_name, self.bank_city,
-                                                                                  self.bank_branch, self.created_on,
-                                                                                  self.updated_on)
+        return '{} | {} | {} | {} | {} | {} | {} | {} | {} | {} | {} | {}'.format(
+            self.customer.user.username, self.id, self.name, self.nickname, self.account_number, self.account_type,
+            self.bank_code, self.bank_name, self.bank_city, self.bank_branch, self.created_on, self.updated_on)
 
 
 class CustomerAccountManager(models.Manager):

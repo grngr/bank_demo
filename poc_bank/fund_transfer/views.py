@@ -23,11 +23,8 @@ def same_bank_add_payee_form(request):
         if form.is_valid():
             # form.save()
             payee = form.save(commit=False)
-            payee.customer = Customer.objects.filter(user=request.user)[0]
-            payee.bank_code = BANK_CODE
-            payee.bank_name = BANK_NAME
-            payee.bank_city = BANK_CITY
-            payee.bank_branch = BANK_BRANCH
+            # payee.customer = Customer.objects.filter(user=request.user)[0]
+            payee.set_customer_and_bank(request.user, BANK_CODE, BANK_NAME, BANK_CITY, BANK_BRANCH)
             payee.save()
             return redirect('same_bank_fund_transfer_list')
     else:
@@ -38,7 +35,8 @@ def same_bank_add_payee_form(request):
 @login_required
 def same_bank_fund_transfer_list(request):
     # return HttpResponse("same_bank_fund_transfer_list")
-    payee_list = Payee.objects.payees_for_customer(request.user, BANK_CODE, True)
+    # payee_list = Payee.objects.filter(bank_code=BANK_CODE).filter(customer__user=request.user)
+    payee_list = Payee.objects.fetch_payees_for_customer(request.user, BANK_CODE, True)
     return render(request, 'fund_transfer/same_bank_fund_transfer_list.html', {'payee_list': payee_list})
 
 
@@ -57,13 +55,13 @@ def other_bank_add_payee_form(request):
         if form.is_valid():
             # form.save()
             payee = form.save(commit=False)
-            payee.customer = Customer.objects.filter(user=request.user)[0]
+            # payee.customer = Customer.objects.filter(user=request.user)[0]
+            payee.set_customer(request.user)
             payee.save()
             return redirect('other_bank_fund_transfer_list')
     else:
         form = OtherBankAddPayeeForm()
     return render(request, 'fund_transfer/other_bank_add_payee_form.html', {'form': form})
-
 
 
 @login_required
@@ -75,5 +73,6 @@ def other_bank_fund_transfer(request):
 @login_required
 def other_bank_fund_transfer_list(request):
     # return HttpResponse("other_bank_fund_transfer_list")
-    payee_list = Payee.objects.payees_for_customer(request.user, BANK_CODE, False)
+    # payee_list = Payee.objects.filter(customer__user=request.user).exclude(bank_code=BANK_CODE)
+    payee_list = Payee.objects.fetch_payees_for_customer(request.user, BANK_CODE, False)
     return render(request, 'fund_transfer/other_bank_fund_transfer_list.html', {'payee_list': payee_list})
